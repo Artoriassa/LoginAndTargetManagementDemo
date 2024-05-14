@@ -19,6 +19,34 @@
     {
       "name": "login_tips",
       "value": "登陆账号以使用更多服务"
+    },
+    {
+      "name": "other_login_method",
+      "value": "其他登陆方式"
+    },
+    {
+      "name": "account",
+      "value": "账号"
+    },
+    {
+      "name": "password",
+      "value": "密码"
+    },
+    {
+      "name": "send_verification_code",
+      "value": "短信验证码登陆"
+    },
+    {
+      "name": "forget_password",
+      "value": "忘记密码"
+    },
+    {
+      "name": "user_login",
+      "value": "登陆"
+    },
+    {
+      "name": "register",
+      "value": "注册账号"
     }
   ]
 }

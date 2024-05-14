@@ -1,0 +1,40 @@
+{
+  "float": [
+    {
+      "name": "spacing_small",
+      "value": "8vp"
+    },
+    {
+      "name": "logo_size_xl",
+      "value": "100vp"
+    },
+    {
+      "name": "logo_size_m",
+      "value": "50vp"
+    },
+    {
+      "name": "font_size_xl",
+      "value": "30fp"
+    },
+    {
+      "name": "font_size_regular",
+      "value": "16fp"
+    },
+    {
+      "name": "margin_xl",
+      "value": "20vp"
+    },
+    {
+      "name": "line_height_m",
+      "value": "0.5"
+    },
+    {
+      "name": "length_m",
+      "value": "60"
+    },
+    {
+      "name": "loading_size",
+      "value": "36vp"
+    }
+  ]
+}

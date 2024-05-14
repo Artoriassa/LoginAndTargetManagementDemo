@@ -18,7 +18,35 @@
     },
     {
       "name": "login_tips",
-      "value": "login to use our services"
+      "value": "Login to use our services"
+    },
+    {
+      "name": "other_login_method",
+      "value": "Other login method"
+    },
+    {
+      "name": "account",
+      "value": "Account"
+    },
+    {
+      "name": "password",
+      "value": "Password"
+    },
+    {
+      "name": "send_verification_code",
+      "value": "Send me verification code"
+    },
+    {
+      "name": "forget_password",
+      "value": "Forget password"
+    },
+    {
+      "name": "user_login",
+      "value": "Login"
+    },
+    {
+      "name": "register",
+      "value": "Register"
     }
   ]
 }

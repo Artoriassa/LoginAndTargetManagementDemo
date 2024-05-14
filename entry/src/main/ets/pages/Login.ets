@@ -1,3 +1,5 @@
+import Constants from '../Common/Constants';
+
 @Entry
 @Component
 struct Login {
@@ -5,68 +7,69 @@ struct Login {
   @State passwordText: string = ''
 
   build() {
-      Column({ space: 8 }) {
-        Blank().height(60)
-        Image($r('app.media.login_logo'))
-          .width(100)
-        Text($r('app.string.login_page'))
-          .fontSize(30)
-          .fontWeight(FontWeight.Medium)
-        Text($r('app.string.login_tips'))
-          .fontColor(Color.Gray)
-          .margin({ bottom: 20 })
-        TextInput({ text: this.accountText, placeholder: '账号'})
-          .backgroundColor($r('app.color.start_window_background'))
-        Line()
-          .width('90%')
-          .height(0.5)
-          .backgroundColor(Color.Gray)
-        TextInput({ text: this.passwordText, placeholder: '密码'})
-          .type(InputType.Password)
-          .backgroundColor($r('app.color.start_window_background'))
-        Line()
-          .width('90%')
-          .height(0.5)
-          .backgroundColor(Color.Gray)
-        Row() {
-          Text('短信验证码登陆')
-            .fontColor(Color.Blue)
-          Text('忘记密码')
-            .fontColor(Color.Blue)
-        }
-        .width('90%')
-        .justifyContent(FlexAlign.SpaceBetween)
-        Blank().height(60)
-        Button('登陆')
-          .width('90%')
-        Button('注册账号')
-          .width('90%')
+    Column({ space: Constants.SPACING_SMALL }) {
+      Blank().height(Constants.LENGTH_SIXTY)
+      Image($r('app.media.login_logo'))
+        .width($r('app.float.logo_size_xl'))
+      Text($r('app.string.login_page'))
+        .fontSize($r('app.float.font_size_xl'))
+        .fontWeight(FontWeight.Medium)
+      Text($r('app.string.login_tips'))
+        .fontColor(Color.Gray)
+        .margin({ bottom: $r('app.float.margin_xl') })
+      TextInput({ text: this.accountText, placeholder: $r('app.string.account') })
+        .backgroundColor($r('app.color.start_window_background'))
+      Line()
+        .width(Constants.COMMON_LENGTH)
+        .height($r('app.float.line_height_m'))
+        .backgroundColor(Color.Gray)
+      TextInput({ text: this.passwordText, placeholder: $r('app.string.password') })
+        .type(InputType.Password)
+        .backgroundColor($r('app.color.start_window_background'))
+      Line()
+        .width(Constants.COMMON_LENGTH)
+        .height($r('app.float.line_height_m'))
+        .backgroundColor(Color.Gray)
+      Row() {
+        Text($r('app.string.send_verification_code'))
           .fontColor(Color.Blue)
-          .backgroundColor(Color.Transparent)
-        if (false) {
-          LoadingProgress()
-            .color(Color.Black)
-            .width(36)
-            .height(36)
-        } else {
-          Blank().height(36)
-        }
-        Text('其他登陆方式')
-          .fontColor(Color.Gray)
-          .fontSize(16)
-        .margin({ bottom: 8, top: 60 })
-          Row() {
-            Image($r('app.media.login_method1'))
-              .width(50)
-            Image($r('app.media.login_method2'))
-              .width(50)
-            Image($r('app.media.login_method3'))
-              .width(50)
-          }
-          .width('90%')
-          .justifyContent(FlexAlign.SpaceEvenly)
+        Text($r('app.string.forget_password'))
+          .fontColor(Color.Blue)
       }
-      .width('100%')
+      .width(Constants.COMMON_LENGTH)
+      .justifyContent(FlexAlign.SpaceBetween)
+
+      Blank().height($r('app.float.length_m'))
+      Button($r('app.string.user_login'))
+        .width(Constants.COMMON_LENGTH)
+      Button($r('app.string.register'))
+        .width(Constants.COMMON_LENGTH)
+        .fontColor(Color.Blue)
+        .backgroundColor(Color.Transparent)
+      if (false) {
+        LoadingProgress()
+          .color(Color.Black)
+          .width($r('app.float.loading_size'))
+          .height($r('app.float.loading_size'))
+      } else {
+        Blank().height($r('app.float.loading_size'))
+      }
+      Text($r('app.string.other_login_method'))
+        .fontColor(Color.Gray)
+        .fontSize($r('app.float.font_size_regular'))
+        .margin({ bottom: Constants.SPACING_SMALL, top: Constants.SPACING_EXTRA_LARGE })
+      Row() {
+        Image($r('app.media.login_method1'))
+          .width($r('app.float.logo_size_m'))
+        Image($r('app.media.login_method2'))
+          .width($r('app.float.logo_size_m'))
+        Image($r('app.media.login_method3'))
+          .width($r('app.float.logo_size_m'))
+      }
+      .width(Constants.COMMON_LENGTH)
+      .justifyContent(FlexAlign.SpaceEvenly)
+    }
+    .width(Constants.FULL_LENGTH)
 
   }
 }
