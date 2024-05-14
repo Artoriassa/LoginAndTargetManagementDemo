@@ -1,11 +1,12 @@
-import Constants from '../Common/Constants';
-
+import Constants from '../common/Constants';
+import router from '@ohos.router';
+import prompt from '@ohos.promptAction';
 @Entry
 @Component
 struct Login {
   @State accountText: string = ''
   @State passwordText: string = ''
-
+  @State isShowingProgress: Boolean = false
   build() {
     Column({ space: Constants.SPACING_SMALL }) {
       Blank().height(Constants.LENGTH_SIXTY)
@@ -15,7 +16,7 @@ struct Login {
       this.verificationAndForgetPsw()
       Blank().height($r('app.float.length_m'))
       this.loginAndRegister()
-      if (false) {
+      if (this.isShowingProgress) {
         this.loadingView()
       } else {
         Blank().height($r('app.float.loading_size'))
@@ -39,6 +40,9 @@ struct Login {
   @Builder accountInput() {
     TextInput({ text: this.accountText, placeholder: $r('app.string.account') })
       .backgroundColor($r('app.color.start_window_background'))
+      .onChange( text => {
+        this.accountText = text
+      })
     Line()
       .width(Constants.COMMON_LENGTH)
       .height($r('app.float.line_height_m'))
@@ -49,6 +53,9 @@ struct Login {
     TextInput({ text: this.passwordText, placeholder: $r('app.string.password') })
       .type(InputType.Password)
       .backgroundColor($r('app.color.start_window_background'))
+      .onChange( text => {
+        this.passwordText = text
+      })
     Line()
       .width(Constants.COMMON_LENGTH)
       .height($r('app.float.line_height_m'))
@@ -69,6 +76,9 @@ struct Login {
   @Builder loginAndRegister() {
     Button($r('app.string.user_login'))
       .width(Constants.COMMON_LENGTH)
+      .onClick(() => {
+        this.login()
+      })
     Button($r('app.string.register'))
       .width(Constants.COMMON_LENGTH)
       .fontColor(Color.Blue)
@@ -97,5 +107,16 @@ struct Login {
     }
     .width(Constants.COMMON_LENGTH)
     .justifyContent(FlexAlign.SpaceEvenly)
+  }
+
+  login() {
+    if (this.accountText === '' || this.passwordText === '') {
+      prompt.showToast({
+        message: $r('app.string.input_empty_tips')
+      })
+    } else {
+      this.isShowingProgress = true;
+      router.replaceUrl({ url: 'pages/MainPage' });
+    }
   }
 }

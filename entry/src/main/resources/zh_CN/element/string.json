@@ -47,6 +47,10 @@
     {
       "name": "register",
       "value": "注册账号"
+    },
+    {
+      "name": "input_empty_tips",
+      "value": "请正确输入您的账号和密码"
     }
   ]
 }

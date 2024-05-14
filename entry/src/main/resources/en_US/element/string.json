@@ -47,6 +47,10 @@
     {
       "name": "register",
       "value": "Register"
+    },
+    {
+      "name": "input_empty_tips",
+      "value": "Please correct your account or password"
     }
   ]
 }
