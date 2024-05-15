@@ -13,13 +13,18 @@
       "value": "50vp"
     },
     {
-      "name": "font_size_xl",
-      "value": "30fp"
+      "name": "font_size_s",
+      "value": "12fp"
     },
     {
       "name": "font_size_regular",
       "value": "16fp"
     },
+    {
+      "name": "font_size_xl",
+      "value": "30fp"
+    },
+
     {
       "name": "margin_xl",
       "value": "20vp"
