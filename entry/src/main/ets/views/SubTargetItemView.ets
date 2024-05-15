@@ -6,29 +6,34 @@ export default struct SubTargetItemView {
   @State target: SubTargetItem = new SubTargetItem('子目标1', '2024/05/01', false)
 
   build() {
-    Row({ space: 8 }) {
+    Row({ space: Constants.SPACING_SMALL }) {
       Text(this.target.name)
-        .margin({ left: 8 })
-      Column({ space: 4 }) {
+        .margin({ left: $r('app.float.margin_s') })
+      Column({ space: Constants.SPACING_EXTRA_SMALL }) {
         if (this.target.finished) {
-          Text('100%')
+          Text($r('app.string.sub_target_finished'))
             .fontSize($r('app.float.font_size_s'))
             .fontWeight(FontWeight.Bold)
         } else {
-          Text('0%')
+          Text($r('app.string.sub_target_not_finished'))
             .fontSize($r('app.float.font_size_s'))
             .fontWeight(FontWeight.Bold)
         }
-        Text('更新时间: ' + this.target.lastUpdateTime)
-          .fontColor(Color.Gray)
-          .fontSize($r('app.float.font_size_s'))
+        Row() {
+          Text($r('app.string.update_time'))
+            .fontColor(Color.Gray)
+            .fontSize($r('app.float.font_size_s'))
+          Text(Constants.COLON + Constants.SPACE + this.target.lastUpdateTime)
+            .fontColor(Color.Gray)
+            .fontSize($r('app.float.font_size_s'))
+        }
       }
-      .margin({ right: 8 })
+      .margin({ right: $r('app.float.margin_s') })
       .alignItems(HorizontalAlign.End)
     }
-    .borderRadius(12)
+    .borderRadius($r('app.float.border_radius_regular'))
     .backgroundColor(Color.White)
-    .height(60)
+    .height($r('app.float.sub_target_height'))
     .width(Constants.COMMON_LENGTH)
     .justifyContent(FlexAlign.SpaceBetween)
   }

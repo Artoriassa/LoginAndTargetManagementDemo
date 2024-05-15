@@ -1,10 +1,6 @@
 {
   "float": [
     {
-      "name": "spacing_small",
-      "value": "8vp"
-    },
-    {
       "name": "logo_size_xl",
       "value": "100vp"
     },
@@ -24,7 +20,18 @@
       "name": "font_size_xl",
       "value": "30fp"
     },
-
+    {
+      "name": "margin_s",
+      "value": "8vp"
+    },
+    {
+      "name": "margin_m",
+      "value": "12vp"
+    },
+    {
+      "name": "margin_l",
+      "value": "16vp"
+    },
     {
       "name": "margin_xl",
       "value": "20vp"
@@ -40,6 +47,26 @@
     {
       "name": "loading_size",
       "value": "36vp"
+    },
+    {
+      "name": "border_radius_regular",
+      "value": "12"
+    },
+    {
+      "name": "sub_target_height",
+      "value": "60"
+    },
+    {
+      "name": "main_target_pic_height",
+      "value": "85"
+    },
+    {
+      "name": "main_target_pic_width",
+      "value": "120"
+    },
+    {
+      "name": "progress_ring_diameter",
+      "value": "50"
     }
   ]
 }

@@ -51,6 +51,34 @@
     {
       "name": "input_empty_tips",
       "value": "Please correct your account or password"
+    },
+    {
+      "name": "update_time",
+      "value": "update time"
+    },
+    {
+      "name": "sub_target_finished",
+      "value": "100%"
+    },
+    {
+      "name": "sub_target_not_finished",
+      "value": "0%"
+    },
+    {
+      "name": "main_target",
+      "value": "Main Target"
+    },
+    {
+      "name": "sub_targets",
+      "value": "Sub Targets"
+    },
+    {
+      "name": "main_target_title",
+      "value": "[en]第一季度运营目标"
+    },
+    {
+      "name": "main_target_sub_title",
+      "value": "[en]实现用户量与用户活跃度提升"
     }
   ]
 }
