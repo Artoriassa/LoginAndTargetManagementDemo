@@ -19,7 +19,7 @@ export default struct SubTargetItemView {
             .fontSize($r('app.float.font_size_s'))
             .fontWeight(FontWeight.Bold)
         }
-        Text('更新时间' + this.target.lastUpdateTime)
+        Text('更新时间: ' + this.target.lastUpdateTime)
           .fontColor(Color.Gray)
           .fontSize($r('app.float.font_size_s'))
       }
