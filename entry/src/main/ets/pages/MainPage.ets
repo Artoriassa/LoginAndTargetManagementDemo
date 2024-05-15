@@ -1,9 +1,12 @@
 import Constants from '../common/Constants';
+import SubTargetItem from '../models/SubTargetItem';
 import SubTargetItemView from '../views/SubTargetItemView';
 
 @Entry
 @Component
 struct MainPage {
+  @State subTargets: SubTargetItem[] = [new SubTargetItem('子目标1', '2024/05/01', false)]
+
   build() {
     Column({ space: Constants.SPACING_MEDIUM }) {
       Text($r('app.string.main_target'))
@@ -62,6 +65,7 @@ struct MainPage {
         Text('05/15/2024 15:08')
       }
       .alignItems(HorizontalAlign.Start)
+
       Stack() {
         Progress({ value: 0, total: 100, type: ProgressType.Ring })
           .width($r('app.float.progress_ring_diameter'))
@@ -80,6 +84,17 @@ struct MainPage {
   }
 
   @Builder subTargetsView() {
-    SubTargetItemView()
+
+    List({space: Constants.SPACING_EXTRA_SMALL}) {
+      ForEach(this.subTargets, (subTarget) => {
+        ListItem() {
+          SubTargetItemView({target:subTarget})
+        }
+      })
+    }
+    .height(Constants.HALF_LENGTH)
+    .width(Constants.FULL_LENGTH)
+    .alignListItem(ListItemAlign.Center)
+    .scrollBar(BarState.Auto)
   }
 }

@@ -3,7 +3,7 @@ import SubTargetItem from '../models/SubTargetItem';
 
 @Component
 export default struct SubTargetItemView {
-  @State target: SubTargetItem = new SubTargetItem('子目标1', '2024/05/01', false)
+  private target?: SubTargetItem;
 
   build() {
     Row({ space: Constants.SPACING_SMALL }) {

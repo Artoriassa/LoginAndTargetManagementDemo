@@ -1,6 +1,7 @@
 export default class Constants {
   static readonly FULL_LENGTH = '100%';
   static readonly COMMON_LENGTH = '90%';
+  static readonly HALF_LENGTH = '50%';
   static readonly MAIN_TARGET_HEIGHT = '24%';
   static readonly HOME_TAB_INDEX = 0;
   static readonly MINE_TAB_INDEX = 1;
