@@ -2,20 +2,14 @@ import Constants from '../common/Constants';
 import SubTargetItem from '../models/SubTargetItem';
 import SubTargetItemView from '../views/SubTargetItemView';
 import AddSubTargetDialog from '../views/AddSubTargetDialog';
+import DataModel from '../viewModel/DataModel';
+
 @Entry
 @Component
 struct MainPage {
-  @State subTargets: SubTargetItem[] = [new SubTargetItem('子目标1', '2024/05/01', false)]
+  @State subTargets: SubTargetItem[] = DataModel.getData()
   dialogController: CustomDialogController = new CustomDialogController({
-    builder: AddSubTargetDialog({
-      onClickOk: (value) => {
-        if (value !== '') {
-          let date = new Date()
-          this.subTargets.push(new SubTargetItem(value, date.toTimeString(), false))
-          this.dialogController.close();
-        }
-      }
-    }),
+    builder: AddSubTargetDialog({ onClickOk: (value) => this.addSubTargetAction(value) }),
     autoCancel: true
   });
 
@@ -39,7 +33,7 @@ struct MainPage {
         .onClick(() => {
           this.dialogController.open()
         })
-        .margin({bottom: $r('app.float.margin_l')})
+        .margin({ bottom: $r('app.float.margin_l') })
     }
     .backgroundColor($r('app.color.mainPage_backgroundColor'))
     .width(Constants.FULL_LENGTH)
@@ -105,10 +99,10 @@ struct MainPage {
 
   @Builder subTargetsView() {
 
-    List({space: Constants.SPACING_EXTRA_SMALL}) {
+    List({ space: Constants.SPACING_EXTRA_SMALL }) {
       ForEach(this.subTargets, (subTarget) => {
         ListItem() {
-          SubTargetItemView({target:subTarget})
+          SubTargetItemView({ target: subTarget })
         }
       })
     }
@@ -116,5 +110,14 @@ struct MainPage {
     .width(Constants.FULL_LENGTH)
     .alignListItem(ListItemAlign.Center)
     .scrollBar(BarState.Auto)
+  }
+
+  addSubTargetAction(targetName: string) {
+    if (targetName !== Constants.EMPTY_STRING) {
+      let date = new Date()
+      DataModel.addData(new SubTargetItem(targetName, date.toTimeString(), false))
+      this.subTargets = DataModel.getData()
+      this.dialogController.close();
+    }
   }
 }
