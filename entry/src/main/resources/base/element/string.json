@@ -79,6 +79,22 @@
     {
       "name": "main_target_sub_title",
       "value": "[en]实现用户量与用户活跃度提升"
+    },
+    {
+      "name": "add_sub_target",
+      "value": "Add sub target"
+    },
+    {
+      "name": "add_sub_target_placeholder",
+      "value": "Please enter sub target name"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "ok",
+      "value": "OK"
     }
   ]
 }

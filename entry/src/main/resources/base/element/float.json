@@ -17,8 +17,12 @@
       "value": "16fp"
     },
     {
+      "name": "font_size_l",
+      "value": "24fp"
+    },
+    {
       "name": "font_size_xl",
-      "value": "30fp"
+      "value": "32fp"
     },
     {
       "name": "margin_s",

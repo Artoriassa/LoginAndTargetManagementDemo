@@ -1,11 +1,23 @@
 import Constants from '../common/Constants';
 import SubTargetItem from '../models/SubTargetItem';
 import SubTargetItemView from '../views/SubTargetItemView';
-
+import AddSubTargetDialog from '../views/AddSubTargetDialog';
 @Entry
 @Component
 struct MainPage {
   @State subTargets: SubTargetItem[] = [new SubTargetItem('子目标1', '2024/05/01', false)]
+  dialogController: CustomDialogController = new CustomDialogController({
+    builder: AddSubTargetDialog({
+      onClickOk: (value) => {
+        if (value !== '') {
+          let date = new Date()
+          this.subTargets.push(new SubTargetItem(value, date.toTimeString(), false))
+          this.dialogController.close();
+        }
+      }
+    }),
+    autoCancel: true
+  });
 
   build() {
     Column({ space: Constants.SPACING_MEDIUM }) {
@@ -20,6 +32,14 @@ struct MainPage {
         .fontSize($r('app.float.font_size_xl'))
         .fontWeight(FontWeight.Medium)
       this.subTargetsView()
+      Blank()
+      Button($r('app.string.add_sub_target'))
+        .fontColor(Color.Blue)
+        .backgroundColor(Color.Gray)
+        .onClick(() => {
+          this.dialogController.open()
+        })
+        .margin({bottom: $r('app.float.margin_l')})
     }
     .backgroundColor($r('app.color.mainPage_backgroundColor'))
     .width(Constants.FULL_LENGTH)
