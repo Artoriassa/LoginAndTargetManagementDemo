@@ -7,11 +7,19 @@ export class DataModel {
     return this.subTargetItemData;
   }
 
-  addData(data: SubTargetItem) {
-    if (!data) {
-      return;
-    }
-    this.subTargetItemData.push(data);
+  addSubTarget(targetName: string) {
+
+    this.subTargetItemData.push(new SubTargetItem(targetName, this.getCurrentTimeString(), false));
+  }
+
+  finishSubTarget(index: number) {
+    this.subTargetItemData[index].finished = true
+    this.subTargetItemData[index].lastUpdateTime = this.getCurrentTimeString()
+  }
+
+  getCurrentTimeString(): string {
+    let date = new Date()
+    return date.toTimeString()
   }
 }
 

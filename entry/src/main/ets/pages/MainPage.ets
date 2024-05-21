@@ -100,9 +100,16 @@ struct MainPage {
   @Builder subTargetsView() {
 
     List({ space: Constants.SPACING_EXTRA_SMALL }) {
-      ForEach(this.subTargets, (subTarget) => {
+      ForEach(this.subTargets, (subTarget: SubTargetItem, index: number) => {
         ListItem() {
-          SubTargetItemView({ target: subTarget })
+          SubTargetItemView({
+            target: subTarget,
+            index: index,
+            onFinishSubTarget: (index) => {
+              DataModel.finishSubTarget(index)
+              DataModel.getData()
+            }
+          })
         }
       })
     }
@@ -114,10 +121,9 @@ struct MainPage {
 
   addSubTargetAction(targetName: string) {
     if (targetName !== Constants.EMPTY_STRING) {
-      let date = new Date()
-      DataModel.addData(new SubTargetItem(targetName, date.toTimeString(), false))
+      DataModel.addSubTarget(targetName)
       this.subTargets = DataModel.getData()
-      this.dialogController.close();
+      this.dialogController.close()
     }
   }
 }
