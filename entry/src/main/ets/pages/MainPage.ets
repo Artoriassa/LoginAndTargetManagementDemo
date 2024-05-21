@@ -170,7 +170,7 @@ struct MainPage {
           this.deleteSelectedSubTargets()
           this.completedSubTargetsCount = DataModel.getCompletedSubTargetsCount()
           this.totalSubTargetsCount = DataModel.getTotalSubTargetsCount()
-          this.latestUpdateTime = new Date().toTimeString()
+          this.latestUpdateTime = DataModel.getData().length === Constants.ZERO ? Constants.DASH : new Date().toTimeString()
         })
     } else {
       Button($r('app.string.add_sub_target'))
