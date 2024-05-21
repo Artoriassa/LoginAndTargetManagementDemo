@@ -11,6 +11,7 @@ struct MainPage {
   @State selectionsArray: boolean[] = []
   @State selectAll: boolean = false
   @State isEditMode: boolean = false
+  @State latestUpdateTime: string = DataModel.getLatestUpdateTime()
   dialogController: CustomDialogController = new CustomDialogController({
     builder: AddSubTargetDialog({ onClickOk: (value) => this.addSubTargetAction(value) }),
     autoCancel: true
@@ -70,7 +71,7 @@ struct MainPage {
         Text($r('app.string.update_time'))
           .fontColor(Color.Gray)
           .fontSize($r('app.float.font_size_s'))
-        Text('05/15/2024 15:08')
+        Text(this.latestUpdateTime)
       }
       .alignItems(HorizontalAlign.Start)
 
@@ -140,6 +141,7 @@ struct MainPage {
             index: index,
             onFinishSubTarget: (index) => {
               DataModel.finishSubTarget(index)
+              this.latestUpdateTime = DataModel.getLatestUpdateTime()
               DataModel.getData()
             }
           })
@@ -161,6 +163,7 @@ struct MainPage {
         .opacity(this.hasSelectedSubTargets() ? $r('app.float.opacity_hundred') : $r('app.float.opacity_thirty'))
         .onClick(() => {
           this.deleteSelectedSubTargets()
+          this.latestUpdateTime = DataModel.getLatestUpdateTime()
         })
     } else {
       Button($r('app.string.add_sub_target'))
@@ -176,6 +179,7 @@ struct MainPage {
   addSubTargetAction(targetName: string) {
     if (targetName !== Constants.EMPTY_STRING) {
       DataModel.addSubTarget(targetName)
+      this.latestUpdateTime = DataModel.getLatestUpdateTime()
       this.subTargets = DataModel.getData()
       this.dialogController.close()
     }

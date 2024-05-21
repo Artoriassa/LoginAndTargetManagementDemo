@@ -1,7 +1,8 @@
+import Constants from '../Common/Constants';
 import SubTargetItem from '../models/SubTargetItem';
 
 export class DataModel {
-  private subTargetItemData: Array<SubTargetItem> = [new SubTargetItem('子目标1', '2024/05/01', false)];
+  private subTargetItemData: Array<SubTargetItem> = [new SubTargetItem('子目标1', new Date().toTimeString(), false)];
 
   getData(): Array<SubTargetItem> {
     return this.subTargetItemData;
@@ -24,6 +25,23 @@ export class DataModel {
         this.subTargetItemData.splice(i, 1);
       }
     }
+  }
+
+  getLatestUpdateTime(): string {
+    let dateStringArray: string[] = []
+    this.subTargetItemData.forEach((item) => {
+      dateStringArray.push(item.lastUpdateTime)
+    })
+    if (dateStringArray.length === 0) {
+      return Constants.DASH;
+    }
+    let latestDate = dateStringArray[0];
+    for (let i = 1; i < dateStringArray.length; i++) {
+      if (dateStringArray[i] > latestDate) {
+        latestDate = dateStringArray[i];
+      }
+    }
+    return latestDate;
   }
 
   getCurrentTimeString(): string {
