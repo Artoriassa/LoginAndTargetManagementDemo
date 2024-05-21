@@ -17,6 +17,15 @@ export class DataModel {
     this.subTargetItemData[index].lastUpdateTime = this.getCurrentTimeString()
   }
 
+  deleteData(selectArr: Array<boolean>) {
+    let dataLen = this.subTargetItemData.length - 1;
+    for (let i = dataLen; i >= 0; i--) {
+      if (selectArr[i]) {
+        this.subTargetItemData.splice(i, 1);
+      }
+    }
+  }
+
   getCurrentTimeString(): string {
     let date = new Date()
     return date.toTimeString()

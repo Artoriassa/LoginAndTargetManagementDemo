@@ -8,6 +8,8 @@ import DataModel from '../viewModel/DataModel';
 @Component
 struct MainPage {
   @State subTargets: SubTargetItem[] = DataModel.getData()
+  @State selectionsArray: boolean[] = []
+  @State selectAll: boolean = false
   @State isEditMode: boolean = false
   dialogController: CustomDialogController = new CustomDialogController({
     builder: AddSubTargetDialog({ onClickOk: (value) => this.addSubTargetAction(value) }),
@@ -127,6 +129,7 @@ struct MainPage {
           SubTargetItemView({
             target: subTarget,
             isEditMode: this.isEditMode,
+            selectionsArray: $selectionsArray,
             index: index,
             onFinishSubTarget: (index) => {
               DataModel.finishSubTarget(index)
@@ -147,7 +150,11 @@ struct MainPage {
       Button($r('app.string.delete'))
         .backgroundColor(Color.Gray)
         .fontColor(Color.Red)
-        .opacity($r('app.float.opacity_thirty'))
+        .enabled(this.hasSelectedSubTargets() ? true : false)
+        .opacity(this.hasSelectedSubTargets() ? $r('app.float.opacity_hundred') : $r('app.float.opacity_thirty'))
+        .onClick(() => {
+          this.deleteSelectedSubTargets()
+        })
     } else {
       Button($r('app.string.add_sub_target'))
         .fontColor(Color.Blue)
@@ -165,5 +172,15 @@ struct MainPage {
       this.subTargets = DataModel.getData()
       this.dialogController.close()
     }
+  }
+
+  deleteSelectedSubTargets() {
+    DataModel.deleteData(this.selectionsArray);
+    this.subTargets = DataModel.getData();
+    this.isEditMode = false;
+  }
+
+  hasSelectedSubTargets(): boolean {
+    return this.selectionsArray.filter((selected: boolean) => selected === true).length > 0;
   }
 }

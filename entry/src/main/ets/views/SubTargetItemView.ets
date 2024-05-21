@@ -4,10 +4,11 @@ import DataModel from '../viewModel/DataModel';
 
 @Component
 export default struct SubTargetItemView {
-  @State isExpanded: boolean = false;
-  @State private target?: SubTargetItem = new SubTargetItem('', '', false);
-  @Prop isEditMode: boolean;
-  private index: number;
+  @State private target?: SubTargetItem = new SubTargetItem('', '', false)
+  @State isExpanded: boolean = false
+  @Prop isEditMode: boolean
+  @Link selectionsArray: boolean[]
+  private index: number
   private onFinishSubTarget: (index: number) => void
 
   build() {
@@ -54,6 +55,10 @@ export default struct SubTargetItemView {
         if (this.isEditMode) {
           Checkbox()
             .margin({ right: $r('app.float.margin_m') })
+            .select(this.selectionsArray[this.index])
+            .onChange((isCheck: boolean) => {
+              this.selectionsArray[this.index] = isCheck;
+            })
         }
       }
     }
