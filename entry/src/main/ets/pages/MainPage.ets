@@ -15,6 +15,7 @@ struct MainPage {
   @State latestUpdateTime: string = DataModel.getLatestUpdateTime()
   @State totalSubTargetsCount: number = DataModel.getTotalSubTargetsCount()
   @State completedSubTargetsCount: number = DataModel.getCompletedSubTargetsCount()
+  @State clickIndex: number = Constants.ZERO
   dialogController: CustomDialogController = new CustomDialogController({
     builder: AddSubTargetDialog({ onClickOk: (value) => this.addSubTargetAction(value) }),
     autoCancel: true
@@ -141,6 +142,7 @@ struct MainPage {
             isEditMode: this.isEditMode,
             selectionsArray: $selectionsArray,
             index: index,
+            clickIndex: $clickIndex,
             onFinishSubTarget: (index) => {
               DataModel.finishSubTarget(index)
               this.latestUpdateTime = DataModel.getLatestUpdateTime()

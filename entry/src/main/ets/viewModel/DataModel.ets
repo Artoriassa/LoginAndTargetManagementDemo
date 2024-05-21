@@ -2,7 +2,7 @@ import Constants from '../Common/Constants';
 import SubTargetItem from '../models/SubTargetItem';
 
 export class DataModel {
-  private subTargetItemData: Array<SubTargetItem> = [new SubTargetItem('子目标1', new Date().toTimeString(), false)];
+  private subTargetItemData: Array<SubTargetItem> = [new SubTargetItem('子目标1', new Date().toTimeString(), false), new SubTargetItem('子目标1', new Date().toTimeString(), false)];
 
   getData(): Array<SubTargetItem> {
     return this.subTargetItemData;

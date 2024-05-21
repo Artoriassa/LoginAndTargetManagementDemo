@@ -8,7 +8,14 @@ export default struct SubTargetItemView {
   @Prop isEditMode: boolean
   @Link selectionsArray: boolean[]
   private index: number
+  @Link @Watch('onClickIndexChanged') clickIndex: number
   private onFinishSubTarget: (index: number) => void
+
+  onClickIndexChanged() {
+    if (this.clickIndex != this.index) {
+      this.isExpanded = false;
+    }
+  }
 
   build() {
     Column({ space: Constants.SPACING_SMALL }) {
@@ -21,6 +28,7 @@ export default struct SubTargetItemView {
     .borderRadius($r('app.float.border_radius_regular'))
     .backgroundColor(Color.White)
     .onClick(() => {
+      this.clickIndex = this.index
       this.isExpanded = !this.isExpanded
     })
   }
