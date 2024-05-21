@@ -103,17 +103,24 @@ struct MainPage {
               .fontColor(Color.Blue)
               .onClick(() => {
                 this.isEditMode = false
+                this.selectAllOrNone(false)
               })
             Text($r('app.string.select_all'))
               .fontColor(Color.Blue)
               .margin({ left: $r('app.float.margin_l') })
             Checkbox()
+              .select(this.isSelectAll())
+              .onClick(() => {
+                this.selectAll = !this.selectAll
+                this.selectAllOrNone(this.selectAll)
+              })
           }
         } else {
           Text($r('app.string.edit'))
             .fontColor(Color.Blue)
             .onClick(() => {
               this.isEditMode = true
+              this.selectAllOrNone(false)
             })
         }
       }
@@ -175,12 +182,33 @@ struct MainPage {
   }
 
   deleteSelectedSubTargets() {
-    DataModel.deleteData(this.selectionsArray);
-    this.subTargets = DataModel.getData();
-    this.isEditMode = false;
+    DataModel.deleteData(this.selectionsArray)
+    this.subTargets = DataModel.getData()
+    this.isEditMode = false
+  }
+
+  selectAllOrNone(selectStatus: boolean) {
+    let newSelectionsArray: Array<boolean> = []
+    this.subTargets.forEach(() => {
+      newSelectionsArray.push(selectStatus)
+    })
+    this.selectionsArray = newSelectionsArray
+  }
+
+  isSelectAll(): boolean {
+    if (this.selectionsArray.length === 0) {
+      return false
+    }
+    let unSelectCount: Length = this.selectionsArray.filter((selected: boolean) => selected === false).length
+    if (unSelectCount === 0) {
+      this.selectAll = true
+      return true
+    }
+    this.selectAll = false
+    return false
   }
 
   hasSelectedSubTargets(): boolean {
-    return this.selectionsArray.filter((selected: boolean) => selected === true).length > 0;
+    return this.selectionsArray.filter((selected: boolean) => selected === true).length > 0
   }
 }
