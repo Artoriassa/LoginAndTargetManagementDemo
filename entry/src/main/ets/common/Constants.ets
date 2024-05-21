@@ -15,4 +15,5 @@ export default class Constants {
   static readonly COLON = ':';
   static readonly SPACE = ' ';
   static readonly EMPTY_STRING = '';
+  static readonly DASH = '-';
 }

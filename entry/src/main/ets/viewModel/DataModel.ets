@@ -44,6 +44,24 @@ export class DataModel {
     return latestDate;
   }
 
+  getCompletedSubTargetsCount(): number {
+    let count = 0
+    this.subTargetItemData.forEach( item => {
+      if (item.finished) {
+        count++
+      }
+    })
+    return count
+  }
+
+  getTotalSubTargetsCount(): number {
+    let count = 0
+    this.subTargetItemData.forEach( _ => {
+        count++
+    })
+    return count
+  }
+
   getCurrentTimeString(): string {
     let date = new Date()
     return date.toTimeString()

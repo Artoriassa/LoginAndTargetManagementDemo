@@ -12,6 +12,8 @@ struct MainPage {
   @State selectAll: boolean = false
   @State isEditMode: boolean = false
   @State latestUpdateTime: string = DataModel.getLatestUpdateTime()
+  @State totalSubTargetsCount: number = DataModel.getTotalSubTargetsCount()
+  @State completedSubTargetsCount: number = DataModel.getCompletedSubTargetsCount()
   dialogController: CustomDialogController = new CustomDialogController({
     builder: AddSubTargetDialog({ onClickOk: (value) => this.addSubTargetAction(value) }),
     autoCancel: true
@@ -76,13 +78,13 @@ struct MainPage {
       .alignItems(HorizontalAlign.Start)
 
       Stack() {
-        Progress({ value: 0, total: 100, type: ProgressType.Ring })
+        Progress({ value: this.completedSubTargetsCount, total: this.totalSubTargetsCount, type: ProgressType.Ring })
           .width($r('app.float.progress_ring_diameter'))
           .height($r('app.float.progress_ring_diameter'))
         Row() {
-          Text('0')
+          Text(this.completedSubTargetsCount.toString())
             .fontColor(Color.Blue)
-          Text('/0')
+          Text('/' + this.totalSubTargetsCount.toString())
         }
       }
     }
@@ -142,6 +144,7 @@ struct MainPage {
             onFinishSubTarget: (index) => {
               DataModel.finishSubTarget(index)
               this.latestUpdateTime = DataModel.getLatestUpdateTime()
+              this.completedSubTargetsCount = DataModel.getCompletedSubTargetsCount()
               DataModel.getData()
             }
           })
@@ -163,6 +166,8 @@ struct MainPage {
         .opacity(this.hasSelectedSubTargets() ? $r('app.float.opacity_hundred') : $r('app.float.opacity_thirty'))
         .onClick(() => {
           this.deleteSelectedSubTargets()
+          this.completedSubTargetsCount = DataModel.getCompletedSubTargetsCount()
+          this.totalSubTargetsCount = DataModel.getTotalSubTargetsCount()
           this.latestUpdateTime = DataModel.getLatestUpdateTime()
         })
     } else {
@@ -180,6 +185,7 @@ struct MainPage {
     if (targetName !== Constants.EMPTY_STRING) {
       DataModel.addSubTarget(targetName)
       this.latestUpdateTime = DataModel.getLatestUpdateTime()
+      this.totalSubTargetsCount = DataModel.getTotalSubTargetsCount()
       this.subTargets = DataModel.getData()
       this.dialogController.close()
     }
