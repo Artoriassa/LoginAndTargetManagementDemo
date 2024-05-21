@@ -111,6 +111,10 @@
     {
       "name": "delete",
       "value": "删除"
+    },
+    {
+      "name": "add_sub_target_successful",
+      "value": "成功添加子目标！"
     }
   ]
 }

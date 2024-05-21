@@ -3,6 +3,7 @@ import SubTargetItem from '../models/SubTargetItem';
 import SubTargetItemView from '../views/SubTargetItemView';
 import AddSubTargetDialog from '../views/AddSubTargetDialog';
 import DataModel from '../viewModel/DataModel';
+import prompt from '@ohos.promptAction';
 
 @Entry
 @Component
@@ -29,7 +30,6 @@ struct MainPage {
       this.mainTargetView()
       this.subTargetsTitle()
       this.subTargetsView()
-      Blank()
       this.bottomView()
     }
     .backgroundColor($r('app.color.mainPage_backgroundColor'))
@@ -99,7 +99,7 @@ struct MainPage {
       Text($r('app.string.sub_targets'))
         .fontSize($r('app.float.font_size_xl'))
         .fontWeight(FontWeight.Medium)
-      if (this.subTargets.length > 0) {
+      if (this.subTargets.length > Constants.ZERO) {
         if (this.isEditMode) {
           Row() {
             Text($r('app.string.cancel'))
@@ -177,7 +177,6 @@ struct MainPage {
         .onClick(() => {
           this.dialogController.open()
         })
-        .margin({ bottom: $r('app.float.margin_l') })
     }
   }
 
@@ -188,6 +187,9 @@ struct MainPage {
       this.totalSubTargetsCount = DataModel.getTotalSubTargetsCount()
       this.subTargets = DataModel.getData()
       this.dialogController.close()
+      prompt.showToast({
+        message: $r('app.string.add_sub_target_successful')
+      })
     }
   }
 
@@ -206,11 +208,11 @@ struct MainPage {
   }
 
   isSelectAll(): boolean {
-    if (this.selectionsArray.length === 0) {
+    if (this.selectionsArray.length === Constants.ZERO) {
       return false
     }
     let unSelectCount: Length = this.selectionsArray.filter((selected: boolean) => selected === false).length
-    if (unSelectCount === 0) {
+    if (unSelectCount === Constants.ZERO) {
       this.selectAll = true
       return true
     }
@@ -219,6 +221,6 @@ struct MainPage {
   }
 
   hasSelectedSubTargets(): boolean {
-    return this.selectionsArray.filter((selected: boolean) => selected === true).length > 0
+    return this.selectionsArray.filter((selected: boolean) => selected === true).length > Constants.ZERO
   }
 }

@@ -32,7 +32,7 @@ export class DataModel {
     this.subTargetItemData.forEach((item) => {
       dateStringArray.push(item.lastUpdateTime)
     })
-    if (dateStringArray.length === 0) {
+    if (dateStringArray.length === Constants.ZERO) {
       return Constants.DASH;
     }
     let latestDate = dateStringArray[0];

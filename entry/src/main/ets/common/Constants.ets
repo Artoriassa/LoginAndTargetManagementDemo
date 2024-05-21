@@ -12,6 +12,7 @@ export default class Constants {
   static readonly SPACING_EXTRA_LARGE = 60;
   static readonly LENGTH_SIXTY = 60;
   static readonly LENGTH_HUNDRED = 100;
+  static readonly ZERO = 0;
   static readonly COLON = ':';
   static readonly SPACE = ' ';
   static readonly EMPTY_STRING = '';

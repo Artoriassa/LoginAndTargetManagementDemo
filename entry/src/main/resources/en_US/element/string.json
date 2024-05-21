@@ -111,6 +111,10 @@
     {
       "name": "delete",
       "value": "Delete"
+    },
+    {
+      "name": "add_sub_target_successful",
+      "value": "Add sub target successful!"
     }
   ]
 }
