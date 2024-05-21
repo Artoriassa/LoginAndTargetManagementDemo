@@ -1,4 +1,4 @@
-import Constants from '../Common/Constants';
+import Constants from '../common/Constants';
 import SubTargetItem from '../models/SubTargetItem';
 
 export class DataModel {
