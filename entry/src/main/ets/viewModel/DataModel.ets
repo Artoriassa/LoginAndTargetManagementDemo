@@ -1,5 +1,6 @@
 import Constants from '../common/Constants';
 import SubTargetItem from '../models/SubTargetItem';
+import DateHelper from '../common/DateHelper'
 
 export class DataModel {
   private subTargetItemData: Array<SubTargetItem> = [new SubTargetItem('子目标1', new Date().toTimeString(), false), new SubTargetItem('子目标1', new Date().toTimeString(), false)];
@@ -10,12 +11,12 @@ export class DataModel {
 
   addSubTarget(targetName: string) {
 
-    this.subTargetItemData.push(new SubTargetItem(targetName, this.getCurrentTimeString(), false));
+    this.subTargetItemData.push(new SubTargetItem(targetName, DateHelper.getCurrentTimeString(), false));
   }
 
   finishSubTarget(index: number) {
     this.subTargetItemData[index].finished = true
-    this.subTargetItemData[index].lastUpdateTime = this.getCurrentTimeString()
+    this.subTargetItemData[index].lastUpdateTime = DateHelper.getCurrentTimeString()
   }
 
   deleteData(selectArr: Array<boolean>) {
@@ -61,11 +62,6 @@ export class DataModel {
     })
     return count
   }
-
-  getCurrentTimeString(): string {
-    let date = new Date()
-    return date.toTimeString()
-  }
 }
 
-export default new DataModel();
+export default new DataModel()
