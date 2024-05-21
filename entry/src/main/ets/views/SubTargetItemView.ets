@@ -6,14 +6,30 @@ import DataModel from '../viewModel/DataModel';
 export default struct SubTargetItemView {
   @State isExpanded: boolean = false;
   @State private target?: SubTargetItem = new SubTargetItem('', '', false);
+  @Prop isEditMode: boolean;
   private index: number;
   private onFinishSubTarget: (index: number) => void
 
   build() {
     Column({ space: Constants.SPACING_SMALL }) {
-      Row({ space: Constants.SPACING_SMALL }) {
-        Text(this.target.name)
-          .margin({ left: $r('app.float.margin_m') })
+      this.mainContent()
+      if (this.isExpanded) {
+        this.expandedContent()
+      }
+    }
+    .width(Constants.COMMON_LENGTH)
+    .borderRadius($r('app.float.border_radius_regular'))
+    .backgroundColor(Color.White)
+    .onClick(() => {
+      this.isExpanded = !this.isExpanded
+    })
+  }
+
+  @Builder mainContent() {
+    Row({ space: Constants.SPACING_SMALL }) {
+      Text(this.target.name)
+        .margin({ left: $r('app.float.margin_m') })
+      Row() {
         Column({ space: Constants.SPACING_EXTRA_SMALL }) {
           if (this.target.finished) {
             Text($r('app.string.sub_target_finished'))
@@ -35,35 +51,33 @@ export default struct SubTargetItemView {
         }
         .margin({ right: $r('app.float.margin_m') })
         .alignItems(HorizontalAlign.End)
-      }
-      .height($r('app.float.sub_target_height'))
-      .width(Constants.FULL_LENGTH)
-      .justifyContent(FlexAlign.SpaceBetween)
-
-      if (this.isExpanded) {
-        Row() {
-          Text($r('app.string.cancel'))
-            .fontColor(Color.Blue)
-            .onClick(() => {
-              this.isExpanded = false
-            })
-          Text($r('app.string.complete'))
-            .fontColor(Color.Blue)
-            .onClick(() => {
-              this.onFinishSubTarget(this.index)
-              this.isExpanded = false
-            })
+        if (this.isEditMode) {
+          Checkbox()
+            .margin({ right: $r('app.float.margin_m') })
         }
-        .justifyContent(FlexAlign.SpaceAround)
-        .width(Constants.FULL_LENGTH)
-        .margin({ bottom: $r('app.float.margin_m') })
       }
     }
-    .width(Constants.COMMON_LENGTH)
-    .borderRadius($r('app.float.border_radius_regular'))
-    .backgroundColor(Color.White)
-    .onClick(() => {
-      this.isExpanded = !this.isExpanded
-    })
+    .height($r('app.float.sub_target_height'))
+    .width(Constants.FULL_LENGTH)
+    .justifyContent(FlexAlign.SpaceBetween)
+  }
+
+  @Builder expandedContent() {
+    Row() {
+      Text($r('app.string.cancel'))
+        .fontColor(Color.Blue)
+        .onClick(() => {
+          this.isExpanded = false
+        })
+      Text($r('app.string.complete'))
+        .fontColor(Color.Blue)
+        .onClick(() => {
+          this.onFinishSubTarget(this.index)
+          this.isExpanded = false
+        })
+    }
+    .justifyContent(FlexAlign.SpaceAround)
+    .width(Constants.FULL_LENGTH)
+    .margin({ bottom: $r('app.float.margin_m') })
   }
 }

@@ -99,6 +99,18 @@
     {
       "name": "complete",
       "value": "complete"
+    },
+    {
+      "name": "edit",
+      "value": "Edit"
+    },
+    {
+      "name": "select_all",
+      "value": "Select all"
+    },
+    {
+      "name": "delete",
+      "value": "Delete"
     }
   ]
 }

@@ -71,6 +71,14 @@
     {
       "name": "progress_ring_diameter",
       "value": "50"
+    },
+    {
+      "name": "opacity_thirty",
+      "value": "0.3"
+    },
+    {
+      "name": "opacity_hundred",
+      "value": "1"
     }
   ]
 }

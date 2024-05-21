@@ -8,6 +8,7 @@ import DataModel from '../viewModel/DataModel';
 @Component
 struct MainPage {
   @State subTargets: SubTargetItem[] = DataModel.getData()
+  @State isEditMode: boolean = false
   dialogController: CustomDialogController = new CustomDialogController({
     builder: AddSubTargetDialog({ onClickOk: (value) => this.addSubTargetAction(value) }),
     autoCancel: true
@@ -21,19 +22,10 @@ struct MainPage {
         .fontWeight(FontWeight.Medium)
         .margin({ top: $r('app.float.margin_l') })
       this.mainTargetView()
-      Text($r('app.string.sub_targets'))
-        .width(Constants.COMMON_LENGTH)
-        .fontSize($r('app.float.font_size_xl'))
-        .fontWeight(FontWeight.Medium)
+      this.subTargetsTitle()
       this.subTargetsView()
       Blank()
-      Button($r('app.string.add_sub_target'))
-        .fontColor(Color.Blue)
-        .backgroundColor(Color.Gray)
-        .onClick(() => {
-          this.dialogController.open()
-        })
-        .margin({ bottom: $r('app.float.margin_l') })
+      this.bottomView()
     }
     .backgroundColor($r('app.color.mainPage_backgroundColor'))
     .width(Constants.FULL_LENGTH)
@@ -97,13 +89,44 @@ struct MainPage {
     .justifyContent(FlexAlign.SpaceBetween)
   }
 
-  @Builder subTargetsView() {
+  @Builder subTargetsTitle() {
+    Row() {
+      Text($r('app.string.sub_targets'))
+        .fontSize($r('app.float.font_size_xl'))
+        .fontWeight(FontWeight.Medium)
+      if (this.subTargets.length > 0) {
+        if (this.isEditMode) {
+          Row() {
+            Text($r('app.string.cancel'))
+              .fontColor(Color.Blue)
+              .onClick(() => {
+                this.isEditMode = false
+              })
+            Text($r('app.string.select_all'))
+              .fontColor(Color.Blue)
+              .margin({ left: $r('app.float.margin_l') })
+            Checkbox()
+          }
+        } else {
+          Text($r('app.string.edit'))
+            .fontColor(Color.Blue)
+            .onClick(() => {
+              this.isEditMode = true
+            })
+        }
+      }
+    }
+    .justifyContent(FlexAlign.SpaceBetween)
+    .width(Constants.COMMON_LENGTH)
+  }
 
+  @Builder subTargetsView() {
     List({ space: Constants.SPACING_EXTRA_SMALL }) {
       ForEach(this.subTargets, (subTarget: SubTargetItem, index: number) => {
         ListItem() {
           SubTargetItemView({
             target: subTarget,
+            isEditMode: this.isEditMode,
             index: index,
             onFinishSubTarget: (index) => {
               DataModel.finishSubTarget(index)
@@ -117,6 +140,23 @@ struct MainPage {
     .width(Constants.FULL_LENGTH)
     .alignListItem(ListItemAlign.Center)
     .scrollBar(BarState.Auto)
+  }
+
+  @Builder bottomView() {
+    if (this.isEditMode) {
+      Button($r('app.string.delete'))
+        .backgroundColor(Color.Gray)
+        .fontColor(Color.Red)
+        .opacity($r('app.float.opacity_thirty'))
+    } else {
+      Button($r('app.string.add_sub_target'))
+        .fontColor(Color.Blue)
+        .backgroundColor(Color.Gray)
+        .onClick(() => {
+          this.dialogController.open()
+        })
+        .margin({ bottom: $r('app.float.margin_l') })
+    }
   }
 
   addSubTargetAction(targetName: string) {
