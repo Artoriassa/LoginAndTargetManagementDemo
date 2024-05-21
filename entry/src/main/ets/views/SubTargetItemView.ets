@@ -1,6 +1,5 @@
 import Constants from '../common/Constants';
 import SubTargetItem from '../models/SubTargetItem';
-import DataModel from '../viewModel/DataModel';
 
 @Component
 export default struct SubTargetItemView {
