@@ -1,6 +1,8 @@
 import Constants from '../common/Constants';
 import router from '@ohos.router';
 import prompt from '@ohos.promptAction';
+import LoginViewModel from '../viewModel/LoginViewModel';
+
 @Entry
 @Component
 struct Login {
@@ -77,7 +79,7 @@ struct Login {
     Button($r('app.string.user_login'))
       .width(Constants.COMMON_LENGTH)
       .onClick(() => {
-        this.login()
+        this.loginAction()
       })
     Button($r('app.string.register'))
       .width(Constants.COMMON_LENGTH)
@@ -109,14 +111,15 @@ struct Login {
     .justifyContent(FlexAlign.SpaceEvenly)
   }
 
-  login() {
-    if (this.accountText === '' || this.passwordText === '') {
+  loginAction() {
+    if (LoginViewModel.login(this.accountText, this.passwordText)) {
       prompt.showToast({
         message: $r('app.string.input_empty_tips')
       })
     } else {
-      this.isShowingProgress = true;
+      this.isShowingProgress = true
       router.replaceUrl({ url: 'pages/MainPage' });
+      this.isShowingProgress = false
     }
   }
 }
